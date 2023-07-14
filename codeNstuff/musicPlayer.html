@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--link rel="stylesheet" href="styleStuff/musicPlayer.css"-->
+        <link rel="stylesheet" href="styleStuff/layout.css">
+        <link rel="stylesheet" href="styleStuff/styles.css">
+        <link rel="stylesheet" href="styleStuff/mediaQueries.css">
+        <title>Music player</title>
+        <script src="musicPlayer.js" defer></script>
+
+    </head>
+    <body id="body" onload="initialize()"> 
+        <header>
+            <!--Das wird der obere Seitenteil mit StyleNav, Visuals, Controls-->
+            <div id="styleNav">
+                <!--Hier werden das logo und die Möglichen Styles angezeigt-->
+                <img src="kanin.png" alt="kaninchenLogo" class="styleNavImage">
+                <button id="neon" class="styleNavName dontWorkOnBlack" onclick="styleChange('neon')">NEON</button>
+                <button id="darkmode" class="styleNavName dontWorkOnBlack" onclick="styleChange('darkmode')">DARKMODE</button>
+		        <button id="nature" class="styleNavName dontWorkOnBlack" onclick="styleChange('nature')">NATURE</button>
+                <button id="default" class="styleNavName dontWorkOnBlack" onclick="styleChange('default')">DEFAULT</button>
+                <button id="black" class="styleNavName dontWorkOnBlack" onclick="styleChange('black')">DON'T CLICK ME!</button>
+                <button id="clear" class="styleNavName dontWorkOnBlack" onclick="clearWebstorage()">CLEAR WEBSTORAGE</button>
+                <button id="styleBut" class="styleNavBut dontWorkOnBlack" onclick="openMobNav()">STYLES</button>
+            </div>
+            <!--Overlay für das mobile Menü-->
+            <div id="mobileStyles" class="overlay">
+                <!--Button um das Menü zu schließen-->
+                <button id="closeStyleBut" class="styleNavBut" onclick="openMobNav()">STYLES</button>
+                <!--Elemente in dem Overlay-->
+                <div id="mobSty" class="mobOvCon">
+                    <button id="neonM" class="ovBut dontWorkOnBlack" onclick="styleChange('neon')">NEON</button>
+                    <button id="darkmodeM" class="ovBut dontWorkOnBlack" onclick="styleChange('darkmode')">DARKMODE</button>
+	                <button id="natureM" class="ovBut dontWorkOnBlack" onclick="styleChange('nature')">NATURE</button>
+                    <button id="defaultM" class="ovBut dontWorkOnBlack" onclick="styleChange('default')">DEFAULT</button>
+                    <button id="blackM" class="ovBut dontWorkOnBlack" onclick="styleChange('black')">DON'T CLICK ME!</button>
+                    <button id="clearM" class="ovBut dontWorkOnBlack" onclick="clearWebstorage()">CLEAR WEBSTORAGE</button>
+                </div>
+            </div>
+            <!--Das werden die Controls und die Visuals-->
+            <div id="conVis">
+                <div id="controls" class="con">
+                    <!--Dieses Div enhält die Kontrollbuttons und Infos zu dem Song-->
+                    <div id="lauftext">
+                        <span id="lauftextInhalt">Currently no song playing!</span>
+                    </div>
+                    <div class="controlButs">
+                        <button id="last" class="conBut">&#8810;</button>
+                        <button id="playPause" class="conBut" disabled>&#9654;</button>
+                        <button id="stop" class="conBut">&#9632;</button>
+                        <button id="next" class="conBut">&#8811;</button>
+                    </div>
+                    <div class="volumeControl">
+                        <button id="mute" class="conBut">
+                            <span class="mute1">
+                                <span class="mute2"></span>
+                                <span class="mute3"></span>
+                                <span class="mute4">&#128362;</span>
+                            </span>
+                        </button>
+                        <input type="range" min="0" max="100" value="100" class="vol" id="songVolume">
+                    </div>
+                </div>
+
+
+                <div id="visuals" class="vis">
+                    <!--Dieses Div enthält die Visuals für den aktuellen Song-->
+                    <canvas id="canvas">
+                    </canvas>
+                </div>
+            </div>
+                
+            <div>
+            
+            </div>
+        </header>
+        
+        <div id="playListStuff">
+		<!--Unterer Teil der Seite mit den Tabs und den verschiedenen Listen-->
+		<!--div id="tabs" class="tabs">
+               Verschoben nach unten! 
+            </div-->
+		<div id="allSongsList" class="list">
+
+            <div class="fixed1">
+
+                <h1>Your songs:</h1>
+                <!-- Button zum Sortieren der Liste -->
+        		<button id="sort">sort by folder</button>
+            </div>
+            <div class="noFix1">
+                <div id="allSongs" class="hoverElements"></div>
+            </div>   
+            
+        </div>
+
+        <div id="curPlayList" class="list">
+            <div id="small" class="fixed1">
+                <h1>Your current playlist:</h1>
+                <button id="deleteSong">delete song</button>
+			    <button id="addSong">add songs</button>
+            </div>
+			
+            <div id="small2" class="noFix1">
+                <div id="currentPlaylist" class="hoverElements"></div>
+			    <!--div id="songsToAdd" style="display: none"></div-->
+            </div>
+
+		</div>
+
+
+        <!--div id="curPlayList2" class="songAdd dino">
+            <div class="fixed1">
+                <h1>Songs you can add:</h1>
+                <button id="closeAddSong">X</button>
+                <p>click on the song you want to add</p>
+            </div>
+			
+            <div class="noFix2">
+			    <div id="songsToAdd" style=" background-color: red;"></div>
+            </div>
+
+		</div-->
+
+		<div id="allPlayList" class="list">
+
+            <div class="fixed1">
+                <h1>Your playlists:</h1>
+                <button id="deletePlaylist" onclick="deletePlaylist()" style="display:none">delete playlist</button>
+            </div>
+			
+            <div class="noFix1">
+                <div id="playlists" class="hoverElements"></div>  
+            </div>
+			
+			
+		</div>
+
+		<div id="createPlaylist" class="list">
+            <div class="fixed2">
+                <h1>Create playlist:</h1>
+
+				<button id="sortInPlaylist" onclick="displayPlaylistCreation()">sort by folder</button>
+				<div id="addPlaylist">
+					<label for="playlistname">Playlist name:</label> <input type="text"
+						id="playlistname" name="playlistname"><br>
+					<div id="playlistLength">0 songs selected</div>
+					<button id="savePlaylist">Save</button>
+				</div>
+            </div>
+		    
+            <div class="noFix2">
+                <div id="songsForPlaylist" class="hoverElements"></div>
+            </div>
+			
+				
+			</div>
+
+
+        <div id="tabs" class="tabs">
+            <button id="allSongsBut" class="tab" onclick="openList('allSongs')">All songs</button>
+            <button id="curPlayBut" class="tab" onclick="openList('curPlayList')">No playlist active</button>
+            <button id="allPlayBut" class="tab" onclick="openList('allPlayList')">All playlists</button>
+            <button id="createPlaylistBut" class="tab" onclick="openList('createPlaylist')">Create playlist</button>
+            <!--button id="garbageBut" class="tab"></button-->
+        </div> 
+        <div id="curPlayList2" class="songAdd" style="display: none;">
+            <div id="small3" class="fixed1">
+                <h1>Songs you can add:</h1>
+                <p>click on the song you want to add</p>
+            </div>
+			
+            <div  id="small4" class="noFix3">
+			    <div id="songsToAdd" ></div>
+            </div>
+
+		</div>
+
+
+		</div>
+	</body>
+</html>

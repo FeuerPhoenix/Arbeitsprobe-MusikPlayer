@@ -1,0 +1,27 @@
+/*Media Querries für verschiedene Bildschirmgrößen*/
+@media screen and (max-width:1024px) {
+    .styleNavName{ 
+        display: none;
+    }
+    .tab{
+        font-size: 4vh;
+    }
+}
+@media screen and (min-width:1024px){
+    .styleNavBut{
+        display: none;
+    }
+    .overlay{
+        display: none;
+    }
+}
+@media screen and (max-width:399px){
+    .conBut{
+        height: 6vh;
+        width: 6vh;
+        margin: 0.6vh;
+    }
+    .tab{
+        font-size: 3vh;
+    }
+}

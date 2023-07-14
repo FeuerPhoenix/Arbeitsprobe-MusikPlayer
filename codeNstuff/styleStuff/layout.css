@@ -1,0 +1,351 @@
+/*Normale html Tags*/
+html{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+button{
+    cursor: pointer;
+}
+
+/*Style Bar oben*/
+#styleNav{
+    height: 10vh;
+    overflow: hidden;
+}
+.styleNavName, .styleNavBut, .styleNavImage{
+    float: left;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    border-style: none;
+    font-size: 2vw;
+}
+.styleNavImage{
+    margin: 0.25rem;
+}
+.styleNavBut, .styleNavName{
+    float: right;
+    margin: 0.7rem;
+}
+
+/*Overlay für das Mobile Menü*/
+.overlay{
+    height: 0;
+    width:100%;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    overflow-y: hidden;
+    transition: 1s;
+}
+.mobOvCon{
+    position: relative;
+    top: 20vh;
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+}
+.ovBut{
+    margin-left: 25vh;
+    padding: 0.5rem;
+    text-decoration: none;
+    font-size: 5vh;
+    display: block;
+    transition: 1s;
+    border-style: none;
+    cursor: pointer;
+}
+
+/*Controls und Visuals der Songs*/
+#conVis{
+    display: flex;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+}
+#controls, #visuals{
+    float: left;
+    width: 50vw;
+    height: 28vh;
+}
+
+#conVis:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/*Hauptsächlich zum Testen*/
+#visuals{
+    background-color: transparent;
+}
+#canvas{
+    background-color: transparent;
+}
+
+
+
+/*Für die bewegten Songtitel:
+https://webdesign.weisshart.de/marquee.php*/
+#lauftext{
+    max-width: 100vw;
+    height: 8vh;
+    font-size: 5vh;
+    white-space: nowrap;
+    overflow: hidden;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+#lauftext:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+#lauftextInhalt{
+    display: inline-block;
+    padding-left: 105%;
+    animation: lauftext 10s linear infinite;
+    text-align: center;
+}
+#lauftextInhalt:hover{
+    animation-play-state:paused;
+}
+@keyframes lauftext {
+    0%{transform: translateX(0);}
+    100%{transform: translateX(-100%);}
+}
+
+/* Kontoll-Buttons*/
+#last, #next, #playPause{
+    font-size: 4vh;
+}
+#stop{
+    font-size: 6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.controlButs{
+    /*Kontainer für Play, Stop, Next, Zurück Button*/
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.conBut{
+    margin: 0.5rem;
+    height: 8vh;
+    width: 8vh;
+    border-style: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.volumeControl{
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mute1{
+    display: inline-block;
+    transform: rotateY(180deg);
+}
+.mute2{
+    font-size: 3vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: -2.75vh;
+    right: -2.75vh;
+}
+.mute3{
+    font-size: 3vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0vh;
+    top: -2.25vh;
+}
+.mute4{
+    font-size: 3vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -2.75vh;
+    left: -1.25vh;
+}
+/*Slider für die Lautstärke*/
+.vol{
+    /*background-color: lightgray;*/
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50%;
+    height: 4vh;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+    align-self: center;
+    border-radius: 15px;
+}
+.vol:hover{
+    opacity: 1;
+}
+.vol::-webkit-slider-thumb{
+   background-color: gray;
+   /* -webkit-appearance: none;*/
+    appearance: none;
+    width: 6vh;
+    height: 6vh;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.vol::-moz-range-thumb{
+    background-color: gray;
+    width: 6vh;
+    height: 6vh;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+/*Visualisierung der medien Datei*/
+.vis{
+    position: relative;
+    height: 0;
+    overflow: hidden;
+}
+.video{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/*(Play-)Listen*/
+#playListStuff{
+    display: flex;
+}
+.tabs{
+    float: right;
+    width: 30vw;
+    height: 62vh;
+}
+
+.tab{
+    font-size: 5vh;
+    display: block;
+    padding: 0px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    transition: 0.3s;
+}
+#allSongsBut,#allPlayBut, #createPlaylistBut, #curPlayBut{
+    height: 15.5vh;
+}
+
+.list{
+    padding-left: 2.5vw;
+    /*overflow: auto;*/
+    float: left;
+    width: 70vw;
+    height: 62vh;
+    display: flex;
+}
+.list p{
+    margin-right: 2vw;
+}
+
+.list h1{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+.halfList{
+    box-sizing: border-box;
+    padding-left: 2.5vw;
+    /*overflow: auto;*/
+    float: left;
+    width: 50vw;
+    height: 62vh;
+    display: flex;
+}
+.songAdd{
+    
+    background-color: aquamarine;
+    /*overflow: auto;*/
+    padding-left: 2.5vw;
+    width: 50vw;
+    height: 62vh;
+    position: absolute;
+    top: 38vh;
+    left: 50vw;
+}
+.songAdd h1{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.fixed1{
+    box-sizing: border-box;
+    display: block;
+    height: 17vh;
+    margin-top: 0;
+}
+.noFix1{
+    box-sizing: border-box;
+    display: block;
+    height: 41vh;
+    overflow: auto;
+}
+.fixed2{
+    box-sizing: border-box;
+    display: block;
+    height: 26vh;
+    margin-top: 0;
+}
+.noFix2{
+    box-sizing: border-box;
+    display: block;
+    height: 32vh;
+    overflow: auto;
+}
+.noFix3{
+    box-sizing: border-box;
+    display: block;
+    height: 38vh;
+    overflow: auto;
+}
+.noFix4{
+    box-sizing: border-box;
+    display: block;
+    height: 30vh;
+    overflow: auto;
+}
+
+/*Einfache Klasse zum Verstecken bestimmter Objekte*/
+.dino{
+    display: none;
+}
