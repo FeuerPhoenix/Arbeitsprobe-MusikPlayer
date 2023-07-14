@@ -2,7 +2,7 @@
 Willkommen zu unseren MusicPlayer!
 #
 Um tatsächlich Musik hören zu können, packen Sie bitte Ihre Musikdateien
-in einem Musikordner im Directory (codeNStuff) des Programms.
+in den Musikordner im Directory (codeNStuff) des Programms.
 #
 Achtung! Dieses Projekt benutzt PHP.
 #
